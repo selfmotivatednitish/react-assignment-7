@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Apps from './components/Apps';
+import { RoleProvider } from './components/userContext';
 
 function App() {
+
+  const [value, setValue] = useState("support")
+
+  let onChangeHandle = (event) => {
+    setValue(event.target.value)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <select value={value} onChange={onChangeHandle}>
+        <option value="support">Support</option>
+        <option value="user">User</option>
+      </select>
+      <RoleProvider value={value}>
+        <Apps />
+      </RoleProvider>
     </div>
   );
 }
